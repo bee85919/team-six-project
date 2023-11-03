@@ -1,9 +1,9 @@
 version: "3"
 
 services:
-  flasktest:
-    build: ./flaskapp
-    container_name: flasktest
+  flask:
+    build: ./flask
+    container_name: flask
     networks:
       - composenet01
     restart: always
@@ -16,7 +16,7 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - flasktest
+      - flask
 
   psql:
     build: ./psql
