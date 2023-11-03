@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  flasktest:
+    build: ./flaskapp
+    container_name: flasktest
+    networks:
+      - composenet01
+    restart: always
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    networks:
+      - composenet01
+    ports:
+      - "80:80"
+    depends_on:
+      - flasktest
+
+  psql:
+    build: ./psql
+    container_name: psql
+    networks:
+      - composenet01
+    restart: always
+    volumes:
+      - volume01:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+
+volumes:
+  volume01:
+
+networks:
+  composenet01:
