@@ -25,4 +25,3 @@ def Redis_Connection():
 if __name__=='__main__':
     print(os.getenv('REDIS_HOST'))
     print(Redis_Connection())
-
